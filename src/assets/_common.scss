@@ -11,8 +11,6 @@
 }
 body {
   font-family: "Montserrat", sans-serif;
-
-  
   background: linear-gradient(
     90deg,
     rgba(253, 146, 34, 1) 0%,
@@ -28,4 +26,8 @@ body {
 
 .link {
   text-decoration: none;
+}
+
+.main{
+  margin: 50px 0;
 }

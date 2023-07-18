@@ -1,0 +1,61 @@
+<script>
+import axios from "axios"
+import _ from "lodash"
+
+export default {
+    data() {
+        return {
+            search: "",
+            searchResult: [],
+            searchTimeout: null,
+            searchError: null
+
+        }
+    },
+    methods: {
+        getSearchResult() {
+            clearTimeout(this.searchTimeout)
+            this.searchError = null
+            this.searchTimeout = setTimeout(async () => {
+
+                if (this.search !== "") {
+                    try {
+                        const result = await axios.get(
+                            `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.search}.json?access_token=${import.meta.env.VITE_API_MAP}&types=place`
+                        );
+                        this.searchResult = JSON.stringify(result.data.features)
+                        console.log(JSON.parse(this.searchResult))
+                    } catch (err) {
+                        this.searchError = err.message
+                        console.log(err)
+                    }
+                }
+            }, 1000)
+
+        },
+    }
+}
+</script>
+<template>
+    <div class="container">
+        <div class="search-wrapper">
+
+            <input class="search-input" v-model="search" @input="getSearchResult()" type="text"
+                placeholder="Search your city">
+            <div class="search-results">
+                <ul class="search-result-list">
+                    <p v-if="searchError" class="error-message">Something went wrong. Error: {{ searchError }}</p>
+                    <p v-else-if="searchResult.length < 1" class="error-message">I don't know such a place, try to enter a
+                        valid place</p>
+                    <li v-else v-for="city in JSON.parse(searchResult)" :key="city.id" class="search-result-item" @click="">
+                        {{ city.place_name }}
+                    </li>
+
+
+
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</template>

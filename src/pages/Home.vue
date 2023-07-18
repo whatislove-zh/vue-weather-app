@@ -1,4 +1,10 @@
-<script></script>
+<script setup>
+import Search from "../components/Search.vue"
+
+</script>
 <template>
-    <h2>Home</h2>
+    <main class="main">
+        <Search />
+
+    </main>
 </template>
