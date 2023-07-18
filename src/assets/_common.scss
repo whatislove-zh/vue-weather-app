@@ -1,0 +1,31 @@
+@import "./variables";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: $black-color;
+  font-weight: $medium-weight;
+  font-size: 18px;
+  scroll-behavior: smooth;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+
+  
+  background: linear-gradient(
+    90deg,
+    rgba(253, 146, 34, 1) 0%,
+    rgba(0, 35, 255, 1) 100%
+  );
+}
+
+.container {
+  margin: auto;
+  max-width: $lg;
+  padding: 0 20px;
+}
+
+.link {
+  text-decoration: none;
+}

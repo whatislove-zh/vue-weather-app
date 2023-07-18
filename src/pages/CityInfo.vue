@@ -1,8 +1,20 @@
-<script></script>
+<script>
+import { useRoute } from "vue-router";
+
+export default {
+
+    setup() {
+        const route = useRoute();
+        console.log( route.params)
+    }
+}
+
+</script>
 <template>
     <div>
         <h2>
-            City name
+            {{ $route.params.name }}
         </h2>
+        
     </div>
 </template>

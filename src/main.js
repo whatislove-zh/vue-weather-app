@@ -7,17 +7,17 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
-      name: "Home",
+
       path: "/",
       component: () => import("./pages/Home.vue"),
     },
     {
-      name: "Favorite",
+
       path: "/favorite",
       component: () => import("./pages/Favorite.vue"),
     },
     {
-      name: "Favorite",
+
       path: "/:name",
       component: () => import("./pages/CityInfo.vue"),
     },
