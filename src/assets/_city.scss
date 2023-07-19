@@ -13,16 +13,11 @@
   padding: 15px;
 }
 
-.current-weather-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 .current-weather {
   width: 100%;
   display: flex;
-  justify-content: space-evenly;
-  gap: 10px;
+  justify-content: center;
+  gap: 30px;
 }
 .city-info,
 .temp-info {
@@ -38,5 +33,5 @@
 .city-description,
 .temp-info-feels {
   font-weight: $regular-weight;
-  font-size: 14px;
+  font-size: 12px;
 }

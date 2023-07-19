@@ -19,20 +19,21 @@ export default {
     },
     methods: {
         getDataByCoord() {
-            navigator.geolocation.getCurrentPosition((position) => {
-                const long = position.coords.longitude
-                const lat = position.coords.latitude
-
-                this.getData(lat, long)
-
-            })
+            if (this.$store.state.cityList.all.length === 0) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    const long = position.coords.longitude
+                    const lat = position.coords.latitude
+                    this.getData(lat, long)
+                })
+            }
+            this.loading = false
         },
         async getData(lat, long) {
             this.loading = true
             this.error = null
             try {
                 const response = await axios.get(
-                    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&lang=${"us"}&appid=${import.meta.env.VITE_API_WEATHER}`
+                    `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&units=metric&lang=${"us"}&appid=${import.meta.env.VITE_API_WEATHER}`
                 );
                 this.$store.dispatch("addCity", response.data)
                 this.loading = false
