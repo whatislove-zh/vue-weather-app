@@ -27,8 +27,8 @@ export default {
     <div class="container">
         <SpinnerLoaderVue :loading="loading" />
 
-        <ul>
-            <li v-for="city in cityList">
+        <ul class="city-list">
+            <li class="city-list-item" v-for="city in cityList">
                 <CityCard :city="city" />
             </li>
         </ul>

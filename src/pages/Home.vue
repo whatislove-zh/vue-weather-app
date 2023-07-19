@@ -23,9 +23,6 @@ export default {
                 const long = position.coords.longitude
                 const lat = position.coords.latitude
 
-                console.log("long", long)
-                console.log("lat", lat)
-
                 this.getData(lat, long)
 
             })
@@ -35,13 +32,10 @@ export default {
             this.error = null
             try {
                 const response = await axios.get(
-                    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${import.meta.env.VITE_API_WEATHER}`
+                    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&lang=${"us"}&appid=${import.meta.env.VITE_API_WEATHER}`
                 );
-                //console.log(this.$store)
                 this.$store.dispatch("addCity", response.data)
-
                 this.loading = false
-
             } catch (error) {
                 console.log(error.response.data.message)
                 this.errorMessage = error.response.data.message

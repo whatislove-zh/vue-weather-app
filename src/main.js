@@ -19,10 +19,6 @@ const router = createRouter({
       path: "/favorite",
       component: () => import("./pages/Favorite.vue"),
     },
-    {
-      path: "/:name",
-      component: () => import("./pages/CityInfo.vue"),
-    },
   ],
 });
 
