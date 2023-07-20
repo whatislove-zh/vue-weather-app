@@ -12,12 +12,13 @@
   width: 100%;
   padding: 15px;
 }
-
+//CURRENT WEATHER ///////////////////////////////////////////////////////////////
 .current-weather {
   width: 100%;
   display: flex;
   justify-content: center;
   gap: 30px;
+  text-align: center;
 }
 .city-info,
 .temp-info {
@@ -34,4 +35,54 @@
 .temp-info-feels {
   font-weight: $regular-weight;
   font-size: 12px;
+}
+
+//HOURLY WEATHER ///////////////////////////////////////////////////////////////
+
+.hourly-weather {
+  background: #0000007a;
+  border-radius: 15px;
+  padding: 15px;
+  .wrapper {
+    overflow: auto;
+  }
+}
+
+.hourly-weather-title {
+  color: white;
+  width: max-content;
+  margin: auto;
+
+  font-weight: $bold-weight;
+  font-size: 25px;
+}
+
+.hourly-weather-list {
+  display: flex;
+  padding: 15px;
+  justify-content: center;
+  gap: 15px;
+}
+
+.hourly-weather-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  .time {
+    color: white;
+  }
+  .weather-img {
+    height: 100px;
+    width: 100px;
+  }
+
+  .description {
+    color: white;
+    font-weight: $regular-weight;
+    font-size: 12px;
+  }
+  .temp {
+    color: white;
+  }
 }
