@@ -34,6 +34,10 @@ export default {
             }, 1000)
 
         },
+        getCity([long, lat]) {
+            
+            this.$store.dispatch("getCity", { lat, long })
+        }
     }
 }
 </script>
@@ -48,8 +52,8 @@ export default {
                 valid place</p>
             <div class="search-results">
                 <ul class="search-result-list">
-                    <li v-if="searchResult.length > 1" v-for="city in JSON.parse(searchResult)" :key="city.id" @click="">
-                        {{ city.place_name }}
+                    <li v-if="searchResult.length > 1" v-for="city in JSON.parse(searchResult)" :key="city.id">
+                        <p @click="getCity(city.geometry.coordinates)">{{ city.place_name }}</p>
                     </li>
                 </ul>
             </div>

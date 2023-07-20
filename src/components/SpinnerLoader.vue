@@ -1,5 +1,5 @@
 <template>
-    <div class="v-spinner" v-show="loading">
+    <div class="v-spinner">
         <div v-bind:style="[spinnerStyle, spinnerDelay1]">
         </div>
         <div v-bind:style="[spinnerStyle, spinnerDelay2]">
@@ -13,10 +13,7 @@
 export default {
 
     props: {
-        loading: {
-            type: Boolean,
-            default: true
-        },
+
         color: {
             type: String,
             default: '#000000'

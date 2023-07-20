@@ -1,21 +1,33 @@
 <script>
 
 export default {
-
-    props: {
-        loading: {
-            type: Boolean,
-            default: true
-        },
-        fetchError: {
-            type: String | null,
-            default: null
-        },
+    data() {
+        return {
+            info: "j"
+        }
     },
 
+    created() {
+        this.getDataByCoord()
+    },
+    methods: {
+        getDataByCoord() {
+            if (this.$store.state.cityList.all.length === 0) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    const long = position.coords.longitude;
+                    const lat = position.coords.latitude;
+
+                    (async () => {
+                        await this.$store.dispatch("getCity", { lat, long }).then((res) => { this.info = res })
+                    })()
 
 
 
+
+                })
+            }
+        },
+    },
     computed: {
         cityList() {
             return this.$route.path === "/" ? this.$store.state.cityList.all : this.$store.state.favorite.favoriteList
@@ -25,9 +37,7 @@ export default {
 }
 </script>
 <template>
-    <div class="error-message" v-if="fetchError !== null">{{ fetchError }}</div>
-    <div v-else class="container">
-        <SpinnerLoaderVue :loading="loading" />
+    <div class="container">
         <ul class="city-list">
             <li class="city-list-item" v-for="city in cityList">
                 <CityCard :city="city" />

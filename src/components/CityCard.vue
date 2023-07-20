@@ -1,19 +1,18 @@
 <script>
 
 export default {
+    props: {
+        city: {
+            type: Object,
+        },
+    },
     data() {
         return {
             currentCityInfo: this.city.list[0],
             favoriteStatus: this.city.favorite
         }
     },
-    props: {
-        city: {
-            type: Object,
-        },
-    },
     computed: {
-
         hourlyData() {
             return JSON.parse(JSON.stringify(this.city.list)).splice(0, 9)
         },
@@ -28,14 +27,10 @@ export default {
         },
         addToFavorite() {
             if (this.favoriteStatus) {
-
                 this.favoriteStatus = false
-
                 this.$store.dispatch("removeFavorite", this.city.city)
             } else {
-
                 this.favoriteStatus = true
-
                 this.$store.dispatch("addFavorite", this.city)
 
             }
