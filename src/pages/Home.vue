@@ -1,6 +1,4 @@
 <script>
-import Search from "../components/Search.vue"
-import CityList from "../components/CityList.vue"
 import axios from "axios"
 
 

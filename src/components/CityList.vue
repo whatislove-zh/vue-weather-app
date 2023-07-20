@@ -1,6 +1,4 @@
 <script>
-import SpinnerLoaderVue from "./SpinnerLoader.vue"
-import CityCard from "./CityCard.vue"
 
 export default {
     props: {

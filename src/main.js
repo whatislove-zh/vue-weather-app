@@ -8,6 +8,11 @@ import SearchVue from "./components/Search.vue";
 import CityListVue from "./components/CityList.vue";
 import CityCardVue from "./components/CityCard.vue";
 
+import { OhVueIcon, addIcons } from "oh-vue-icons";
+import { MdFavoriteTwotone } from "oh-vue-icons/icons";
+
+addIcons(MdFavoriteTwotone);
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -29,4 +34,5 @@ app.component("SpinnerLoaderVue", SpinnerLoaderVue);
 app.component("Search", SearchVue);
 app.component("CityList", CityListVue);
 app.component("CityCard", CityCardVue);
+app.component("v-icon", OhVueIcon);
 app.mount("#app");

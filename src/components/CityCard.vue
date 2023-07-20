@@ -2,7 +2,9 @@
 export default {
     data() {
         return {
-            currentCityInfo: this.city.list[0]
+            currentCityInfo: this.city.list[0],
+            favoriteActive: "favorite-button",
+            favoriteStatus: false
         }
     },
     props: {
@@ -19,13 +21,25 @@ export default {
         timeFormat(dt_txt) {
             const time = new Date(dt_txt)
             return `${time.getHours()}:${time.getMinutes()}0`
+        },
+        addToFavorite() {
+            if (this.favoriteStatus) {
+                this.favoriteActive = "favorite-button"
+                this.favoriteStatus = false
 
+            } else {
+                this.favoriteActive = "favorite-button active"
+                this.favoriteStatus = true
+
+            }
         }
     }
 
 }
 </script>
 <template>
+    <v-icon :class="favoriteActive" @click="addToFavorite()" name="md-favorite-twotone" title="Add to favorite" fill="red"
+        scale="2" animation="ring" hover="true" />
     <div class="current-weather">
         <div class="city-info">
             <h2 class="city-name">{{ city.city.name }}</h2>
