@@ -23,17 +23,18 @@
   }
 }
 
-// .search-input:focus + .search-results {
-//   display: block;
-// }
+.search-input:focus + .search-results {
+  visibility:visible;
+}
 
 .search-results {
-  //display: none;
+  visibility: hidden;
   width: 100%;
   position: relative;
   margin-top: 10px;
   min-height: 50px;
   z-index: 10;
+  transition: all 0.5s ease;
 }
 
 .search-result-list {
