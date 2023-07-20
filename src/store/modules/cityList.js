@@ -3,6 +3,10 @@ import axios from "axios";
 //initial state
 const state = {
   all: [],
+  statusInfo: {
+    loading: true,
+    error: null,
+  },
   quantityError: false,
 };
 
@@ -18,21 +22,31 @@ const mutations = {
   changeErrorStatus(state, { status }) {
     state.quantityError = status;
   },
+  setStatus(state, { loading, error }) {
+    state.statusInfo = { loading, error };
+  },
 };
 
 //actions
 const actions = {
   async getCity({ commit, dispatch }, { lat, long }) {
     try {
+      commit("setStatus", { loading: true, error: null });
       const response = await axios.get(
         `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&units=metric&lang=${"us"}&appid=${
           import.meta.env.VITE_API_WEATHER
         }`
       );
-      dispatch("addCity", response.data);
-      return { loading: false, error: null };
+      //setTimeout(() => { //розкоментувати щоб побачити що лоадер дійсно є, бо дані надто швидко приходять
+        dispatch("addCity", response.data);
+        commit("setStatus", { loading: false, error: null });
+      //}, 6000);
     } catch (error) {
-      return { loading: false, error: error.response.data.message };
+      console.log({ error });
+      commit("setStatus", {
+        loading: false,
+        error: error.response?.data?.message,
+      });
     }
   },
   addCity({ state, commit }, city) {

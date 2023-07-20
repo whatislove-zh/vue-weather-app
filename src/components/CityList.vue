@@ -1,11 +1,6 @@
 <script>
 
 export default {
-    data() {
-        return {
-            info: "j"
-        }
-    },
 
     created() {
         this.getDataByCoord()
@@ -16,14 +11,7 @@ export default {
                 navigator.geolocation.getCurrentPosition((position) => {
                     const long = position.coords.longitude;
                     const lat = position.coords.latitude;
-
-                    (async () => {
-                        await this.$store.dispatch("getCity", { lat, long }).then((res) => { this.info = res })
-                    })()
-
-
-
-
+                    this.$store.dispatch("getCity", { lat, long })
                 })
             }
         },
@@ -32,6 +20,9 @@ export default {
         cityList() {
             return this.$route.path === "/" ? this.$store.state.cityList.all : this.$store.state.favorite.favoriteList
         },
+        loading() {
+            return this.$store.state.cityList.statusInfo.loading
+        }
 
     },
 }
@@ -42,6 +33,7 @@ export default {
             <li class="city-list-item" v-for="city in cityList">
                 <CityCard :city="city" />
             </li>
+            <SpinnerLoaderVue v-show="loading"  />
         </ul>
     </div>
 </template>
