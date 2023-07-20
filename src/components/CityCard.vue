@@ -4,7 +4,7 @@ export default {
     data() {
         return {
             currentCityInfo: this.city.list[0],
-            favoriteStatus: false
+            favoriteStatus: this.city.favorite
         }
     },
     props: {
@@ -13,11 +13,12 @@ export default {
         },
     },
     computed: {
+
         hourlyData() {
             return JSON.parse(JSON.stringify(this.city.list)).splice(0, 9)
         },
         fillColor() {
-           return this.favoriteStatus ? "#ff6200" : "none"
+            return this.favoriteStatus ? "#ff6200" : "none"
         }
     },
     methods: {

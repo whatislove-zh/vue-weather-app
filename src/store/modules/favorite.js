@@ -7,10 +7,13 @@ const state = {
 //mutation
 const mutations = {
   pushFavorite(state, { city }) {
+    city.favorite = true;
     state.favoriteList.push(city);
   },
   filterFavorite(state, { id }) {
-    state.favoriteList = state.favoriteList.filter((item) => item.city.id !== id);
+    state.favoriteList = state.favoriteList.filter(
+      (item) => item.city.id !== id
+    );
   },
   favoriteOverloadStatus(state, { status }) {
     state.favoriteOverload = status;

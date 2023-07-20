@@ -1,6 +1,16 @@
-<script setup>
+<script>
+export default {
+    data() {
+        return {
+            errorMessage: null,
+            loading: false
+        }
+    },
+}
 </script>
 
 <template>
-    <h2>Favorite</h2>
+    <div class="container favorite-block">
+        <CityList :error="errorMessage" :loading="loading" />
+    </div>
 </template>

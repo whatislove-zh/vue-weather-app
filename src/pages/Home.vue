@@ -5,7 +5,6 @@ import axios from "axios"
 export default {
     data() {
         return {
-            cityInfo: {},
             errorMessage: null,
             loading: true
         }

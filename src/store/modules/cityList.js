@@ -7,6 +7,7 @@ const state = {
 //mutation
 const mutations = {
   pushCity(state, { city }) {
+    city.favorite = false;
     state.all.push(city);
   },
   filterCity(state, { id }) {

@@ -38,7 +38,7 @@ export default {
 }
 </script>
 <template>
-    <div class="container">
+    <div class="container search-block">
         <div class="search-wrapper">
 
             <input class="search-input" v-model="search" @input="getSearchResult()" type="text"
