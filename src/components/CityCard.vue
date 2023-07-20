@@ -26,10 +26,13 @@ export default {
             if (this.favoriteStatus) {
                 this.favoriteActive = "favorite-button"
                 this.favoriteStatus = false
-
+              
+                this.$store.dispatch("removeFavorite", this.city.city)
             } else {
                 this.favoriteActive = "favorite-button active"
                 this.favoriteStatus = true
+
+                this.$store.dispatch("addFavorite", this.city)
 
             }
         }
@@ -39,7 +42,7 @@ export default {
 </script>
 <template>
     <v-icon :class="favoriteActive" @click="addToFavorite()" name="md-favorite-twotone" title="Add to favorite" fill="red"
-        scale="2" animation="ring" hover="true" />
+        scale="2" animation="ring" :hover=true />
     <div class="current-weather">
         <div class="city-info">
             <h2 class="city-name">{{ city.city.name }}</h2>
