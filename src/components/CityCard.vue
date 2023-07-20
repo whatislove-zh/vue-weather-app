@@ -1,9 +1,9 @@
 <script>
+
 export default {
     data() {
         return {
             currentCityInfo: this.city.list[0],
-            favoriteActive: "favorite-button",
             favoriteStatus: false
         }
     },
@@ -16,6 +16,9 @@ export default {
         hourlyData() {
             return JSON.parse(JSON.stringify(this.city.list)).splice(0, 9)
         },
+        fillColor() {
+           return this.favoriteStatus ? "#ff6200" : "none"
+        }
     },
     methods: {
         timeFormat(dt_txt) {
@@ -24,12 +27,12 @@ export default {
         },
         addToFavorite() {
             if (this.favoriteStatus) {
-                this.favoriteActive = "favorite-button"
+
                 this.favoriteStatus = false
-              
+
                 this.$store.dispatch("removeFavorite", this.city.city)
             } else {
-                this.favoriteActive = "favorite-button active"
+
                 this.favoriteStatus = true
 
                 this.$store.dispatch("addFavorite", this.city)
@@ -41,8 +44,8 @@ export default {
 }
 </script>
 <template>
-    <v-icon :class="favoriteActive" @click="addToFavorite()" name="md-favorite-twotone" title="Add to favorite" fill="red"
-        scale="2" animation="ring" :hover=true />
+    <icon-base class="favorite-button" @click="addToFavorite()" :fill="fillColor"
+        stroke="#ff6200"><heart-icon /></icon-base>
     <div class="current-weather">
         <div class="city-info">
             <h2 class="city-name">{{ city.city.name }}</h2>
