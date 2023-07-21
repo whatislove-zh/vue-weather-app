@@ -1,4 +1,5 @@
 <script>
+import Chart from "./Chart.vue"
 
 export default {
     props: {
@@ -6,12 +7,14 @@ export default {
             type: Object,
         },
     },
+    components: {
+        Chart,
+    },
     data() {
         return {
             currentCityInfo: this.city.list[0],
             favoriteStatus: this.city.favorite,
             confirmHiddenStatus: true,
-            bodyOverflow: "hidden"
         }
     },
     computed: {
@@ -91,5 +94,6 @@ export default {
             </div>
         </div>
     </div>
+    <Chart :data="hourlyData" duration="day" />
 </template>
 
