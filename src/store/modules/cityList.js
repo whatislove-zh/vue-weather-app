@@ -17,7 +17,7 @@ const mutations = {
     state.all.push(city);
   },
   filterCity(state, { id }) {
-    state.all.filter((item) => item.id === id);
+    state.all = state.all.filter((item) => item.city.id !== id);
   },
   changeErrorStatus(state, { status }) {
     state.quantityError = status;
@@ -57,8 +57,8 @@ const actions = {
     }
   },
   removeCity({ state, commit }, city) {
+    commit("filterCity", { id: city.id });
     commit("changeErrorStatus", { status: true });
-    commit("filterCity", { city: city.id });
   },
 };
 

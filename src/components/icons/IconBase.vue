@@ -25,7 +25,7 @@ export default {
         },
         fill: {
             type: String,
-            default: 'red'
+            default: 'none'
         },
         stroke: {
             type: String,
