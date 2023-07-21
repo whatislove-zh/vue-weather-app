@@ -10,7 +10,6 @@ export default {
     components: {
         Forecast
     },
-
     data() {
         return {
             currentCityInfo: this.city.list[0],
@@ -23,14 +22,13 @@ export default {
     },
     computed: {
         hourlyData() {
-            return JSON.parse(JSON.stringify(this.city.list)).splice(0, 9)
+            return JSON.parse(JSON.stringify(this.city.list)).splice(0, 8)
         },
         fillColor() {
             return this.favoriteStatus ? "#ff6200" : "none"
         },
     },
     methods: {
-
         addToFavorite() {
             if (this.favoriteStatus) {
                 this.favoriteStatus = false
@@ -70,7 +68,6 @@ export default {
     created() {
         this.calculateNext5Days()
     }
-
 }
 </script>
 <template>
