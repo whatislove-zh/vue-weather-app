@@ -32,6 +32,10 @@ export default {
             const time = new Date(dt_txt)
             return `${time.getHours()}:${time.getMinutes()}0`
         },
+        dateFormat(dt_txt) {
+            const data = new Date(dt_txt).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+            return `${data}`
+        },
         chartValues(keys, values) {
             const result = {
                 labels: [],
@@ -42,12 +46,17 @@ export default {
                 result.dataSet.push(Math.trunc(values.next().value))
             }
             return result
+        },
+        chartData(dayOrWeek, dt) {
+            return dayOrWeek === "day" ? this.timeFormat(dt) : this.dateFormat(dt)
+
         }
     },
     mounted() {
         for (let val of this.data) {
-            const data = this.timeFormat(val.dt_txt)
-            this.map.set(data, val.main.temp)
+
+            const data = this.chartData(this.duration, val.dt_txt)
+            this.map.set(data, val.main.temp);
         }
         const keys = this.map.keys();
         const values = this.map.values();
