@@ -1,6 +1,6 @@
 <template>
     <div class="chart">
-        <canvas id="myChart"></canvas>
+        <canvas :id="chartId"></canvas>
     </div>
 </template>
 
@@ -16,6 +16,10 @@ export default {
         duration: {
             type: String,
             default: 'day'
+        },
+        chartId:{
+            type:String,
+            default:"myChart"
         }
     },
     data() {
@@ -31,7 +35,7 @@ export default {
                 temp.push(values.next().value)
             }
             return temp;
-        }
+        },
     },
     methods: {
         calculateNext5Days() {
@@ -56,9 +60,19 @@ export default {
             const time = new Date(dt_txt)
             return `${time.getHours()}:${time.getMinutes()}0`
         },
+        chartValues(keys, values) {
+            const result = {
+                labels:[],
+                dataSet:[]
+            };
+            for (let i=0;i<=this.map.size;i++) {
+                result.labels.push(keys.next().value)
+                result.dataSet.push(Math.trunc(values.next().value))
+            }
+            return result
+        }
     },
     mounted() {
-
         if (this.duration === "day") {
             for (let val of this.data) {
                 const data = this.timeFormat(val.dt_txt)
@@ -69,20 +83,16 @@ export default {
         }
         const keys = this.map.keys();
         const values = this.map.values();
-
+        const chartData = this.chartValues(keys, values)
+        
         Chart.defaults.color = '#ffffff'
-
-        const ctx = document.getElementById('myChart');
-        const myChart = new Chart(ctx, {
+        const ctx = document.getElementById(this.chartId);
+        new Chart(ctx, {
             type: 'line',
             data: {
-                labels: [keys.next().value, keys.next().value, keys.next().value, keys.next().value, keys.next().value],
+                labels: chartData.labels,
                 datasets: [{
-                    data: [Math.round(values.next().value),
-                    Math.round(values.next().value),
-                    Math.round(values.next().value),
-                    Math.round(values.next().value),
-                    Math.round(values.next().value)],
+                    data: chartData.dataSet,
                     backgroundColor: '#1266F1',
                     borderColor: 'black',
                     color: 'black',
@@ -119,8 +129,8 @@ export default {
             }
         });
 
-        console.log(myChart)
-        console.log(this.map)
+        // console.log(myChart)
+        // console.log(this.map)
     }
 }
 </script>

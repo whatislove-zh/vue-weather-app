@@ -94,6 +94,6 @@ export default {
             </div>
         </div>
     </div>
-    <Chart :data="hourlyData" duration="day" />
+    <Chart :data="hourlyData" duration="day" :chartId="city.city.name" />
 </template>
 

@@ -38,8 +38,8 @@ const actions = {
         }`
       );
       //setTimeout(() => { //розкоментувати щоб побачити що лоадер дійсно є, бо дані надто швидко приходять
-        dispatch("addCity", response.data);
-        commit("setStatus", { loading: false, error: null });
+      dispatch("addCity", response.data);
+      commit("setStatus", { loading: false, error: null });
       //}, 6000);
     } catch (error) {
       console.log({ error });
@@ -50,7 +50,9 @@ const actions = {
     }
   },
   addCity({ state, commit }, city) {
-    if (state.all.length >= 5) {
+    const isCity = state.all.find((el) => el.city.id === city.city.id);
+    console.log(isCity);
+    if (state.all.length >= 5 || isCity !== undefined) {
       commit("changeErrorStatus", { status: true });
     } else {
       commit("pushCity", { city });
