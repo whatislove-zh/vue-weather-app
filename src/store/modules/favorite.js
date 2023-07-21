@@ -20,12 +20,14 @@ const mutations = {
   favoriteOverloadStatus(state, { status }) {
     state.favoriteOverload = status;
   },
+  
 };
 
 //actions
 const actions = {
   addFavorite({ state, commit }, city) {
-    if (state.favoriteList.length >= 5) {
+    const isCity = state.favoriteList.find((el) => el.city.id === city.city.id);
+    if (state.favoriteList.length >= 5 || isCity) {
       commit("favoriteOverloadStatus", { status: true });
     } else {
       commit("pushFavorite", { city });

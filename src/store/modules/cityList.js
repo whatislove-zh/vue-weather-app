@@ -59,7 +59,7 @@ const actions = {
   },
   removeCity({ state, commit }, city) {
     commit("filterCity", { id: city.id });
-    commit("changeErrorStatus", { status: true });
+    commit("changeErrorStatus", { status: false });
   },
 };
 

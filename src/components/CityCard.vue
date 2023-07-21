@@ -6,6 +6,11 @@ export default {
         city: {
             type: Object,
         },
+        favorite: {
+            type: Boolean,
+            default: false
+        }
+
     },
     components: {
         Forecast
@@ -13,7 +18,6 @@ export default {
     data() {
         return {
             currentCityInfo: this.city.list[0],
-            favoriteStatus: this.city.favorite,
             confirmHiddenStatus: true,
             dayOrWeek: "day",
             week: {},
@@ -21,6 +25,9 @@ export default {
         }
     },
     computed: {
+        favoriteStatus() {
+            return this.city.favorite
+        },
         hourlyData() {
             return JSON.parse(JSON.stringify(this.city.list)).splice(0, 8)
         },
@@ -31,15 +38,14 @@ export default {
     methods: {
         addToFavorite() {
             if (this.favoriteStatus) {
-                this.favoriteStatus = false
                 this.$store.dispatch("removeFavorite", this.city.city)
             } else {
-                this.favoriteStatus = true
                 this.$store.dispatch("addFavorite", this.city)
             }
         },
         deleteItem() {
             this.$store.dispatch("removeCity", this.city.city)
+            this.confirmHiddenStatus = true
         },
         confirmHiddenToggle() {
             if (this.confirmHiddenStatus) {
@@ -57,7 +63,6 @@ export default {
         calculateNext5Days() {
             for (let val of this.city.list) {
                 const data = new Date(val.dt * 1000).toLocaleDateString(undefined, { month: "numeric", day: "numeric" });
-
                 if (!this.week.hasOwnProperty(data)) {
                     this.week[data] = data
                     this.weekArr.push(val)
@@ -95,7 +100,7 @@ export default {
         </div>
     </div>
     <div class="controls">
-        <icon-base class="delete-button" @click="confirmHiddenToggle()" stroke="black"
+        <icon-base v-show="!favorite" class="delete-button" @click="confirmHiddenToggle()" stroke="black"
             iconName="Delete"><trash-icon /></icon-base>
         <icon-base class="favorite-button" @click="addToFavorite()" :fill="fillColor" stroke="#ff6200"
             iconName="Add to favorite"><heart-icon /></icon-base>

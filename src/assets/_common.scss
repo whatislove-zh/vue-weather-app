@@ -31,3 +31,23 @@ body {
 .error-message {
   margin: 0 10px;
 }
+
+.error-modal {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #000000bf;
+  padding: 15px;
+  border-radius: 15px;
+  margin: 15px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+
+  .error-message {
+    color: white;
+  }
+  .error-close {
+    cursor: pointer;
+  }
+}

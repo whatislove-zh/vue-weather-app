@@ -1,6 +1,13 @@
 <script>
 
 export default {
+    props: {
+        favorite: {
+            type: Boolean,
+            default: false
+        }
+
+    },
 
     created() {
         this.getDataByCoord()
@@ -31,9 +38,9 @@ export default {
     <div class="container">
         <ul class="city-list">
             <li class="city-list-item" v-for="city in cityList">
-                <CityCard :city="city" />
+                <CityCard :city="city" :favorite="favorite" />
             </li>
-            <SpinnerLoaderVue v-show="loading"  />
+            <SpinnerLoaderVue v-show="loading" />
         </ul>
     </div>
 </template>
