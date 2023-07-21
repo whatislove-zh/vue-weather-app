@@ -1,6 +1,8 @@
+const localData = localStorage.getItem("favoriteList");
+
 //initial state
 const state = {
-  favoriteList: [],
+  favoriteList: localData === null ? [] : JSON.parse(localData),
   favoriteOverload: false,
 };
 
@@ -27,11 +29,13 @@ const actions = {
       commit("favoriteOverloadStatus", { status: true });
     } else {
       commit("pushFavorite", { city });
+      localStorage.setItem("favoriteList", JSON.stringify(state.favoriteList));
     }
   },
   removeFavorite({ state, commit }, city) {
     commit("favoriteOverloadStatus", { status: false });
     commit("filterFavorite", { id: city.id });
+    localStorage.setItem("favoriteList", JSON.stringify(state.favoriteList));
   },
 };
 
