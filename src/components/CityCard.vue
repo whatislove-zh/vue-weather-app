@@ -1,5 +1,5 @@
 <script>
-import Chart from "./Chart.vue"
+import Forecast from './Forecast.vue'
 
 export default {
     props: {
@@ -8,13 +8,17 @@ export default {
         },
     },
     components: {
-        Chart,
+        Forecast
     },
+
     data() {
         return {
             currentCityInfo: this.city.list[0],
             favoriteStatus: this.city.favorite,
             confirmHiddenStatus: true,
+            dayOrWeek: "day",
+            week: {},
+            weekArr: []
         }
     },
     computed: {
@@ -23,13 +27,10 @@ export default {
         },
         fillColor() {
             return this.favoriteStatus ? "#ff6200" : "none"
-        }
+        },
     },
     methods: {
-        timeFormat(dt_txt) {
-            const time = new Date(dt_txt)
-            return `${time.getHours()}:${time.getMinutes()}0`
-        },
+
         addToFavorite() {
             if (this.favoriteStatus) {
                 this.favoriteStatus = false
@@ -48,7 +49,26 @@ export default {
             } else {
                 this.confirmHiddenStatus = true
             }
-        }
+        },
+        dayChoose() {
+            this.dayOrWeek = "day"
+        },
+        weekChoose() {
+            this.dayOrWeek = "week"
+        },
+        calculateNext5Days() {
+            for (let val of this.city.list) {
+                const data = new Date(val.dt * 1000).toLocaleDateString(undefined, { month: "numeric", day: "numeric" });
+
+                if (!this.week.hasOwnProperty(data)) {
+                    this.week[data] = data
+                    this.weekArr.push(val)
+                }
+            }
+        },
+    },
+    created() {
+        this.calculateNext5Days()
     }
 
 }
@@ -60,6 +80,10 @@ export default {
             <button class="confirm-modal-btn btn-yes" @click="deleteItem()">Yes</button>
             <button class="confirm-modal-btn btn-no" @click="confirmHiddenToggle()">No</button>
         </div>
+    </div>
+    <div class="day-week">
+        <button class="day-button" @click="dayChoose()">Day</button>
+        <button class="week-button" @click="weekChoose()">Week</button>
     </div>
     <div class="current-weather">
         <div class="city-info">
@@ -79,21 +103,7 @@ export default {
         <icon-base class="favorite-button" @click="addToFavorite()" :fill="fillColor" stroke="#ff6200"
             iconName="Add to favorite"><heart-icon /></icon-base>
     </div>
-    <div class="hourly-weather">
-        <h2 class="hourly-weather-title">Hourly weather</h2>
-        <hr />
-        <div class="wrapper">
-            <div class="hourly-weather-list">
-                <div class="hourly-weather-item" v-for="weather in hourlyData">
-                    <p class="time">{{ timeFormat(weather.dt_txt) }}</p>
-                    <img class="weather-img" :src="`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`
-                        " alt="weather-icon" />
-                    <p class="description">{{ weather.weather[0].description }}</p>
-                    <p class="temp">{{ Math.trunc(weather.main.temp) }}°C</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <Chart :data="hourlyData" duration="day" :chartId="city.city.name" />
+    <Forecast v-if="dayOrWeek === 'day'" :data="hourlyData" :cityName="city.city.name" />
+    <Forecast v-else :data="weekArr" :dayOr="dayOrWeek" :cityName="city.city.name" />
 </template>
 

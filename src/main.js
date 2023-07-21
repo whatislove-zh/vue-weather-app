@@ -7,11 +7,9 @@ import SpinnerLoaderVue from "./components/SpinnerLoader.vue";
 import SearchVue from "./components/Search.vue";
 import CityListVue from "./components/CityList.vue";
 import CityCardVue from "./components/CityCard.vue";
-import IconBaseVue from "./components/icons/IconBase.vue"
-import HeartIconVue from "./components/icons/HeartIcon.vue"
-import TrashIconVue from "./components/icons/TrashIcon.vue"
-
-
+import IconBaseVue from "./components/icons/IconBase.vue";
+import HeartIconVue from "./components/icons/HeartIcon.vue";
+import TrashIconVue from "./components/icons/TrashIcon.vue";
 
 
 const router = createRouter({
@@ -38,5 +36,6 @@ app.component("CityCard", CityCardVue);
 app.component("icon-base", IconBaseVue);
 app.component("heart-icon", HeartIconVue);
 app.component("trash-icon", TrashIconVue);
+
 
 app.mount("#app");

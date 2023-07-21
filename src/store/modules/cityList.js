@@ -51,7 +51,6 @@ const actions = {
   },
   addCity({ state, commit }, city) {
     const isCity = state.all.find((el) => el.city.id === city.city.id);
-    console.log(isCity);
     if (state.all.length >= 5 || isCity !== undefined) {
       commit("changeErrorStatus", { status: true });
     } else {
