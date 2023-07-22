@@ -48,7 +48,7 @@ export default {
                 :placeholder="$t('search.placeholder')" />
             <p v-if="searchError" class="error-message">{{ $t("search.searchError") }} <br /> {{ $t(error) }}: {{ searchError
             }}</p>
-            <p v-if="searchResult.length < 1" class="error-message">{{ $t("search.nonCityError") }}</p>
+            <p v-if="searchResult.length < 1 || searchResult ==='[]'" class="error-message">{{ $t("search.nonCityError") }}</p>
             <div class="search-results">
                 <ul class="search-result-list">
                     <li v-if="searchResult.length > 1" v-for="city in JSON.parse(searchResult)" :key="city.id">
