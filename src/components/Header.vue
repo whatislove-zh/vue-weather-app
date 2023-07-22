@@ -20,8 +20,8 @@ export default {
                 <nav class="nav">
                     <RouterLink class="header-link link" to="/">{{ $t("nav.home") }}</RouterLink>
                     <RouterLink class="header-link link" to="/favorite">{{ $t("nav.favorite") }}</RouterLink>
-                    <button @click="languageToggle()" class="changeLanguage header-link">{{ $t("changeLanguage") }}</button>
                 </nav>
+                <button @click="languageToggle()" class="changeLanguage">{{ $t("changeLanguage") }}</button>
             </div>
         </div>
     </header>
