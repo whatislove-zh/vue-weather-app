@@ -5,6 +5,7 @@ export default {
         languageToggle() {
             const language = this.$i18n.locale === "uk" ? "en" : "uk"
             this.$i18n.locale = language
+            localStorage.setItem("language", language)
         }
     }
 }

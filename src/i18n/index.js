@@ -5,8 +5,10 @@ import en from "./en.json";
 
 const locales = { en, uk };
 
+const localData = localStorage.getItem("language")
+
 export default createI18n({
-  locale: "uk",
+  locale: localData === undefined ? "en":localData,
   fallbackLocale: "en",
   messages: locales,
 });
