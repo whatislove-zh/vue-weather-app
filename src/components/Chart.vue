@@ -82,7 +82,7 @@ export default {
                     legend: false,
                     title: {
                         display: true,
-                        text: 'Graph of average temperature'
+                        text: this.$t("graphTitle")
                     },
                     tooltip: {
                         enabled: false
@@ -93,7 +93,7 @@ export default {
                         display: true,
                         title: {
                             display: true,
-                            text: 'Temp'
+                            text: this.$t("graphY")
                         },
                     },
                     x: {

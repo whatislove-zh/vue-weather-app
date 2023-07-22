@@ -18,7 +18,8 @@ export default {
                 navigator.geolocation.getCurrentPosition((position) => {
                     const long = position.coords.longitude;
                     const lat = position.coords.latitude;
-                    this.$store.dispatch("getCity", { lat, long })
+                    const locale = this.$i18n.locale
+                    this.$store.dispatch("getCity", { lat, long, locale })
                 })
             }
         },

@@ -29,11 +29,11 @@ const mutations = {
 
 //actions
 const actions = {
-  async getCity({ commit, dispatch }, { lat, long }) {
+  async getCity({ commit, dispatch }, { lat, long, locale }) {
     try {
       commit("setStatus", { loading: true, error: null });
       const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&units=metric&lang=${"us"}&appid=${
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&units=metric&lang=${locale}&appid=${
           import.meta.env.VITE_API_WEATHER
         }`
       );

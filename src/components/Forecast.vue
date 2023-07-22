@@ -25,7 +25,8 @@ export default {
             return `${time.getHours()}:${time.getMinutes()}0`
         },
         dateFormat(dt_txt) {
-            const data = new Date(dt_txt).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+            const locale = this.$i18n.locale
+            const data = new Date(dt_txt).toLocaleDateString(locale, { month: "short", day: "numeric" });
             return `${data}`
         }
     }
@@ -36,7 +37,8 @@ export default {
 
 <template>
     <div class="hourly-weather">
-        <h2 class="hourly-weather-title">Hourly weather</h2>
+        <h2 v-if="dayOr === 'day'" class="hourly-weather-title">{{ $t("hourlyTitle") }}</h2>
+        <h2 v-else="dayOr === 'day'" class="hourly-weather-title">{{ $t("weekTitle") }}</h2>
         <hr />
         <div class="wrapper">
             <div class="hourly-weather-list">

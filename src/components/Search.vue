@@ -35,8 +35,8 @@ export default {
 
         },
         getCity([long, lat]) {
-            
-            this.$store.dispatch("getCity", { lat, long })
+            const locale = this.$i18n.locale
+            this.$store.dispatch("getCity", { lat, long, locale })
         }
     }
 }
@@ -44,12 +44,11 @@ export default {
 <template>
     <div class="container search-block">
         <div class="search-wrapper">
-
             <input class="search-input" v-model="search" @input="getSearchResult()" type="text"
-                placeholder="Search your city" />
-            <p v-if="searchError" class="error-message">Something went wrong. <br /> Error: {{ searchError }}</p>
-            <p v-if="searchResult.length < 1" class="error-message">I don't know such a place, try to enter a
-                valid place</p>
+                :placeholder="$t('search.placeholder')" />
+            <p v-if="searchError" class="error-message">{{ $t("search.searchError") }} <br /> {{ $t(error) }}: {{ searchError
+            }}</p>
+            <p v-if="searchResult.length < 1" class="error-message">{{ $t("search.nonCityError") }}</p>
             <div class="search-results">
                 <ul class="search-result-list">
                     <li v-if="searchResult.length > 1" v-for="city in JSON.parse(searchResult)" :key="city.id">

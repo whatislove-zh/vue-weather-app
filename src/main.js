@@ -12,6 +12,8 @@ import HeartIconVue from "./components/icons/HeartIcon.vue";
 import TrashIconVue from "./components/icons/TrashIcon.vue";
 import ConfirmIconVue from "./components/icons/ConfirmIcon.vue";
 
+import i18n from "./i18n";
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -29,6 +31,8 @@ const router = createRouter({
 const app = createApp(App);
 app.use(router);
 app.use(store);
+app.use(i18n);
+
 app.component("SpinnerLoaderVue", SpinnerLoaderVue);
 app.component("Search", SearchVue);
 app.component("CityList", CityListVue);

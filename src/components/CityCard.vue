@@ -78,14 +78,14 @@ export default {
 <template>
     <div v-show="!confirmHiddenStatus" @click.self="confirmHiddenToggle()" class="confirm-modal">
         <div class="confirm-modal-wrapper">
-            <h2 class="confirm-modal-title">Are you sure you want to delete this city?</h2>
-            <button class="confirm-modal-btn btn-yes" @click="deleteItem()">Yes</button>
-            <button class="confirm-modal-btn btn-no" @click="confirmHiddenToggle()">No</button>
+            <h2 class="confirm-modal-title">{{$t("deleteConfirm")}}</h2>
+            <button class="confirm-modal-btn btn-yes" @click="deleteItem()">{{$t("yes")}}</button>
+            <button class="confirm-modal-btn btn-no" @click="confirmHiddenToggle()">{{$t("no")}}</button>
         </div>
     </div>
     <div class="day-week">
-        <button class="day-button" @click="dayChoose()">Day</button>
-        <button class="week-button" @click="weekChoose()">Week</button>
+        <button class="day-button" @click="dayChoose()">{{$t("day")}}</button>
+        <button class="week-button" @click="weekChoose()">{{$t("week")}}</button>
     </div>
     <div class="current-weather">
         <div class="city-info">
